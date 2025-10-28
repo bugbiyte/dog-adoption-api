@@ -1,4 +1,4 @@
-# Don't commit installed packages
+# Don't commit installed packagess
 node_modules
 
 # Don't commit secrets

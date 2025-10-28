@@ -8,7 +8,7 @@ dotenv.config();              // 1
 connectDB();                  // 2
 
 const app = express();        // 3
-
+ 
 app.use(cors());              // 4
 app.use(morgan("dev"));       // 5
 app.use(express.json());      // 6
