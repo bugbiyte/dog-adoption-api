@@ -1,0 +1,35 @@
+{
+	"name": "dog-adoption-platform-api",
+	"version": "1.0.0",
+	"description": "Dog Adoption Platform API",
+	"main": "app.js",
+	"scripts": {
+		"name": "dog-adoption-api",
+		"version": "1.0.0",
+		"description": "API for user auth, dog registration/adoption with MongoDB Atlas",
+		"main": "app.js",
+		"type": "commonjs",
+		"scripts": {
+			"start": "node app.js",
+			"dev": "nodemon app.js",
+			"test": "mocha --timeout 10000"
+		}
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"bcryptjs": "^3.0.2",
+		"cors": "^2.8.5",
+		"dotenv": "^17.2.3",
+		"express": "^5.1.0",
+		"jsonwebtoken": "^9.0.2",
+		"mongoose": "^8.19.2",
+		"morgan": "^1.10.1"
+	},
+	"devDependencies": {
+		"chai": "^6.2.0",
+		"mocha": "^11.7.4",
+		"nodemon": "^3.1.10",
+		"supertest": "^7.1.4"
+	}
+}

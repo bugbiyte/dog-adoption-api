@@ -1,0 +1,13 @@
+# Don't commit installed packages
+node_modules
+
+# Don't commit secrets
+.env
+
+# macOS Finder junk
+.DS_Store
+
+# log files / debug output
+npm-debug.log*
+yarn-debug.log*
+*.log
