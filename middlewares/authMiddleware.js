@@ -1,21 +1,28 @@
-// Replace this file with custom middleware functions, including authentication and rate limitingconst jwt = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
 
-module.exports = function auth(req, res, next) {
-  const authHeader = req.header("Authorization");                  // 1
-  const token = authHeader?.startsWith("Bearer ")                  // 2
-    ? authHeader.slice(7) 
-    : null;
+const authMiddleware = (req, res, next) => {
+  console.log("ALL HEADERS:", req.headers);   // <--- add this
 
-  if (!token) {                                                    // 3
-    return res.status(401).json({ message: "Missing token" });
+  const header = req.headers["authorization"];
+
+  if (!header || !header.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "Authorization header missing" });
   }
 
-  try {                                                            // 4
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);     // 5
-    req.user = { id: decoded.id };                                 // 6
-    next();                                                        // 7
-  } catch (err) {                                                  // 8
+  const token = header.split(" ")[1];
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    req.user = {
+      id: decoded.userId,
+      username: decoded.username,
+    };
+
+    next();
+  } catch (err) {
     return res.status(401).json({ message: "Invalid or expired token" });
   }
 };
+
+module.exports = authMiddleware;

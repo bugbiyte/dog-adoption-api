@@ -1,19 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../middlewares/authMiddleware");
+
+const authenticateToken = require("../middlewares/authMiddleware");
 const {
   registerDog,
   adoptDog,
   removeDog,
-  getMyDogs,
-  getAdoptedDogs
+  listMyRegisteredDogs,
+  listMyAdoptedDogs,
 } = require("../controllers/dogController");
 
-// Authenticated routes:
-router.post("/", auth, registerDog);          // POST /api/dogs
-router.post("/:id/adopt", auth, adoptDog);    // POST /api/dogs/:id/adopt
-router.delete("/:id", auth, removeDog);       // DELETE /api/dogs/:id
-router.get("/mine", auth, getMyDogs);         // GET /api/dogs/mine
-router.get("/adopted", auth, getAdoptedDogs); // GET /api/dogs/adopted
+// All dog routes require authentication
+router.post("/", authenticateToken, registerDog);
+router.post("/:id/adopt", authenticateToken, adoptDog);
+router.delete("/:id", authenticateToken, removeDog);
+router.get("/my/registered", authenticateToken, listMyRegisteredDogs);
+router.get("/my/adopted", authenticateToken, listMyAdoptedDogs);
 
 module.exports = router;
